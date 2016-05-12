@@ -101,7 +101,7 @@
             <a href="https://github.com/acacha/adminlte-laravel"></a><b>AdminLaComunidad</b></a>. Trabajo de Fin de Grado 2016.
             <strong>Copyright &copy; 2016 </a>.</strong> Creado por <a href="#">José Caballero García</a>.
             <br/>
-            Puedes ver el código en <a href="#" target="_blank">Github</a> Realizado con Bootstrap 3.3, jQuery y Laravel 5.2
+            Puedes ver el código en <a href="https://github.com/j82caballero/lacomunidad" target="_blank">Github</a> Realizado con Bootstrap 3.3, jQuery y Laravel 5.2
         </p>
 
     </div>
