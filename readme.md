@@ -21,4 +21,4 @@ Esta aplicación está implementada con Laravel 5.2, Bootstrap 3 y jQuery
 
 4.- Crear las tablas con:
 
-        php artisan migrate:refresh --seed
+    php artisan migrate:refresh --seed
