@@ -11,9 +11,9 @@
 
     @foreach ($movimientos as $movimiento)
         <tr data-id="{{ $movimiento->id }}">
-            <td><a href="{{ $movimiento->propietario != null ? route('propietarios.show', $movimiento->propietario->id) : '#' }}">
+            <td><a href="{{ $movimiento->propietario->activo == true ? route('propietarios.show', $movimiento->propietario->id) : '#' }}">
                     {{ $movimiento->propietario != null ? $movimiento->propietario->name : 'Comunidad' }}
-                    {{ $movimiento->propietario_id != null ? '( ' . $movimiento->propietario->propiedad->first()->propiedad() . ' )' : '' }}
+                    {{ ($movimiento->propietario->activo == true && $movimiento->propietario_id != null) ? '( ' . $movimiento->propietario->propiedad->first()->propiedad() . ' )' : '( No tiene propiedad)' }}
                 </a>
             </td>
             <td>{{ $movimiento->concepto->nombre }}</td>

@@ -11,6 +11,7 @@
 |
 */
 
+Route::get('reportes/{date_start}/{date_end}', 'PdfController@crear_reporte');
 
 Route::get('/', function () {
 

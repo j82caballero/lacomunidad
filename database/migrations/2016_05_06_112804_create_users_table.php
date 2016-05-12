@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration
             $table->mediumText('observaciones');
             $table->enum('perfil',['admin','user'])->default('user');
 
+            // Activo - saber si el usuario continua en la comunidad
+            $table->boolean('activo')->default(true);
+
             // Confirmación email
             $table->string('registration_token')->nullable();
 

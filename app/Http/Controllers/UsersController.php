@@ -49,7 +49,7 @@ class UsersController extends Controller
         }
 
 
-        $propietarios = User::paginate(10);
+        $propietarios = User::where('activo', true)->paginate(10);
 
         return view('admin.propietarios.index', compact('propietarios'));
     }
@@ -159,7 +159,19 @@ class UsersController extends Controller
     {
         $propietario = User::findOrFail($id);
 
-        $propietario->delete();
+        // No lo eliminamos fisicamente
+        // Lo dejamos inactivo
+//        $propietario->delete();
+        $propietario->activo = false;
+        $propietario->save();
+
+        // Buscamos la propiedad si tiene relacionada
+        $propiedad = Propiedades::where('user_id', $propietario->id)->get()->first();
+
+        if ($propiedad) {
+            $propiedad->user_id = null;
+            $propiedad->save();
+        }
 
         $message = 'El propietario ' . $propietario->name . ' fue eliminado.';
 

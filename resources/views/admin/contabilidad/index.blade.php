@@ -54,8 +54,22 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Estado de Cuenta General del
-                    <span style="font-weight: bold;">{{ isset($fechas['date_start'], $fechas['date_end']) ? date('d-m-Y', strtotime($fechas['date_start'])) . ' al ' . date('d-m-Y', strtotime($fechas['date_end'])) : '' }}</span>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-11">
+                            Estado de Cuenta General del
+                            <span style="font-weight: bold;">{{ isset($fechas['date_start'], $fechas['date_end']) ? date('d-m-Y', strtotime($fechas['date_start'])) . ' al ' . date('d-m-Y', strtotime($fechas['date_end'])) : '' }}</span>
+                        </div>
+                        <div class="col-md-1">
+                            @php
+                                $data = [
+                                    'date_start' => isset($fechas['date_start']) ? $fechas['date_start'] : '',
+                                    'date_end'   => isset($fechas['date_end']) ? $fechas['date_end'] : ''
+                                ];
+                            @endphp
+                            <a href="{{ url('reportes', $fechas) }}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
 

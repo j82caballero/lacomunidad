@@ -67,7 +67,8 @@ class RelacionController extends Controller
             ->whereNotNull('user_id')
             ->lists('user_id');
 
-        $propietarios = User::select()->whereNotIn('id', $propiedadesId)->get();
+        $propietarios = User::select()->where('activo', true)
+            ->whereNotIn('id', $propiedadesId)->get();
 
 
         return view('admin.relacion.create', compact('propiedades', 'propietarios' ,'tiposPagos'));

@@ -47,8 +47,8 @@
                             <th>Información</th>
                         </tr>
                         <tr>
-                            <td>{{ $propietario->propiedad->first()->propiedad() }}</td>
-                            <td>{{ $propietario->informacion() }}</td>
+                            <td>{{ $propietario->propiedad->first() != null ? $propietario->propiedad->first()->propiedad() : 'No tiene propiedad' }}</td>
+                            <td>{{ $propietario->propiedad->first() != null ? $propietario->informacion() : '--' }}</td>
                         </tr>
 
                     </table>
