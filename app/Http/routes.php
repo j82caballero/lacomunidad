@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('reportes/{date_start}/{date_end}', 'PdfController@crear_reporte');
-
 Route::get('/', function () {
 
     // Si está autentificado vamos al home
@@ -31,44 +29,50 @@ Route::get('/', function () {
 
 });
 
-Route::auth();
-
-Route::resource('comunidad', 'ComunidadController',
-    ['only' => ['index', 'create', 'store', 'edit', 'update']]
-);
-Route::resource('tipospropiedades', 'TiposPropiedadesController',
-    ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]
-);
-Route::resource('propiedades', 'PropiedadesController',
-    ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]
-);
-Route::resource('propietarios', 'UsersController');
-
-// Relación Propiedades y Propietarios
-Route::resource('relacion', 'RelacionController',
-    ['only' => ['index', 'create', 'store', 'destroy']]
-);
-
-Route::resource('garajes', 'GarajesController',
-    ['only' => ['index', 'create', 'store', 'destroy']]
-);
-
-Route::resource('contabilidad', 'ContabilidadController',
-    ['only' => ['index']]
-);
-Route::resource('ingresos', 'IngresosController',
-    ['only' => ['index', 'create', 'store', 'destroy']]
-);
-Route::resource('gastos', 'GastosController',
-    ['only' => ['index', 'create', 'store', 'destroy']]
-);
-
 // Confirmación email route
 Route::get('confirmation/{token}', [
     'uses' => 'Auth\AuthController@getConfirmation',
     'as'   => 'confirmation'
 ]);
 
-Route::resource('junta', 'JuntasController',
-    ['only' => ['index', 'store']]
-);
+Route::group(['middleware' => 'perfil:admin'], function () {
+
+    Route::auth();
+
+    Route::resource('comunidad', 'ComunidadController',
+        ['only' => ['index', 'create', 'store', 'edit', 'update']]
+    );
+    Route::resource('tipospropiedades', 'TiposPropiedadesController',
+        ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]
+    );
+    Route::resource('propiedades', 'PropiedadesController',
+        ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]
+    );
+    Route::resource('propietarios', 'UsersController');
+
+// Relación Propiedades y Propietarios
+    Route::resource('relacion', 'RelacionController',
+        ['only' => ['index', 'create', 'store', 'destroy']]
+    );
+
+    Route::resource('garajes', 'GarajesController',
+        ['only' => ['index', 'create', 'store', 'destroy']]
+    );
+
+    Route::resource('contabilidad', 'ContabilidadController',
+        ['only' => ['index']]
+    );
+    Route::resource('ingresos', 'IngresosController',
+        ['only' => ['index', 'create', 'store', 'destroy']]
+    );
+    Route::resource('gastos', 'GastosController',
+        ['only' => ['index', 'create', 'store', 'destroy']]
+    );
+
+    Route::resource('junta', 'JuntasController',
+        ['only' => ['index', 'store']]
+    );
+
+    Route::get('reportes/{date_start}/{date_end}', 'PdfController@crear_reporte');
+
+});

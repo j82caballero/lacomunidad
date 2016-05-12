@@ -34,6 +34,16 @@ class HomeController extends Controller
      */
     public function index(Comunidad $comunidad, Request $request)
     {
+        // Sino tiene permisos no entra
+        $user = auth()->user();
+        
+        if ( !$user->activo || $user->perfil == 'user' ) {
+
+            auth()->logout();
+
+            return redirect('login')->with('alert', 'No tiene permisos para acceder');
+        }
+
         // Comprobamos si está registrada la comunidad
         $comunidad = Comunidad::all()->first();
 
